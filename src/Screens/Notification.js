@@ -9,7 +9,7 @@ const Notification = () => {
         showsVerticalScrollIndicator={false}
       >
         <Text style={styles.text}>
-          Welcome to Ajwa Supermarket! Please read these terms and conditions
+          Welcome to Healthy Fresh ! Please read these terms and conditions
           carefully before using our services. By accessing or using our
           services, you agree to be bound by these terms.
         </Text>
@@ -20,7 +20,7 @@ const Notification = () => {
         </Text>
         <Text style={styles.subTitle}>2. Services</Text>
         <Text style={styles.text}>
-          Ajwa Supermarket offers a variety of products including groceries,
+        Healthy Fresh  offers a variety of products including groceries,
           household items, and personal care products.
         </Text>
         <Text style={styles.subTitle}>3. User Responsibilities</Text>
@@ -42,7 +42,7 @@ const Notification = () => {
         </Text>
         <Text style={styles.subTitle}>6. Modifications</Text>
         <Text style={styles.text}>
-          Ajwa Supermarket reserves the right to modify these terms at any time.
+        Healthy Fresh  reserves the right to modify these terms at any time.
           Users will be notified of any changes.
         </Text>
         <Text style={styles.subTitle}>7. Contact Us</Text>

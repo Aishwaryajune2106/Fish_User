@@ -21,7 +21,7 @@ const Category = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.post(
-          "https://lunarsenterprises.com:6014/ajwa/list/category",
+          "https://lunarsenterprises.com:6009/fishapp/list/category",
           {}
         );
         if (response.data.result) {
@@ -47,7 +47,7 @@ const Category = () => {
       <Image
         source={
           item.c_image
-            ? { uri: `https://lunarsenterprises.com:6014/${item.c_image}` }
+            ? { uri: `https://lunarsenterprises.com:6009/${item.c_image}` }
             : NoImage
         }
         style={styles.categoryImage}

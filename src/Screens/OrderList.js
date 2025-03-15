@@ -14,7 +14,7 @@ const OrderList = () => {
     const fetchOrders = async () => {
       try {
         const response = await fetch(
-          "https://lunarsenterprises.com:6014/ajwa/list/order",
+          "/list/order",
           {
             method: "POST",
             headers: {

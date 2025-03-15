@@ -1,41 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
-import { Image } from "react-native";
-import Home from "../Screens/Home";
-import Category from "../Screens/Category";
-import Favourites from "../Screens/Favourites";
-import ProductList from "../Screens/ProductList";
-import Header from "../Component/Header";
+import React, {useEffect, useState} from 'react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
+import {Image} from 'react-native';
+import Home from '../Screens/Home';
+import Category from '../Screens/Category';
+import Favourites from '../Screens/Favourites';
+import ProductList from '../Screens/ProductList';
+import Header from '../Component/Header';
 
-import HeartInactive from "../assets/images/heart.png";
-import Heart from "../assets/images/heartwhite.png";
-import Categoryimg from "../assets/images/category1.png";
-import CategoryimgInactive from "../assets/images/category.png";
-import Homeimg from "../assets/images/home.png";
+import HeartInactive from '../assets/images/heart.png';
+import Heart from '../assets/images/heartwhite.png';
+import Categoryimg from '../assets/images/category1.png';
+import CategoryimgInactive from '../assets/images/category.png';
+import Homeimg from '../assets/images/home.png';
 
-import Userwhite from "../assets/images/userwhite.png";
-import User from "../assets/images/user.png";
+import Userwhite from '../assets/images/userwhite.png';
+import User from '../assets/images/user.png';
 
-import Cartwhite from "../assets/images/cartwhite.png";
-import Cartgrey from "../assets/images/cartgrey.png";
+import Cartwhite from '../assets/images/cartwhite.png';
+import Cartgrey from '../assets/images/cartgrey.png';
 
-import HomeimgInactive from "../assets/images/homewhite.png";
-import ViewProducts from "../Screens/ViewProducts";
-import Cart from "../Screens/Cart";
-import CartHeader from "../Component/CartHeader";
-import Address from "../Screens/Address";
-import Account from "../Screens/Account";
-import OrderList from "../Screens/OrderList";
-import Aboutme from "../Screens/Aboutme";
-import Myaddress from "../Screens/Myaddress";
-import Notification from "../Screens/Notification";
-import Login from "../Screens/Login";
-import CreateAccount from "../Screens/CreateAccount";
-import NewAddress from "../Screens/NewAddress";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import ConfirmOrder from "../Screens/ConfirmOrder";
-import ForgotPassword from "../Screens/ForgotPassword";
+import HomeimgInactive from '../assets/images/homewhite.png';
+import ViewProducts from '../Screens/ViewProducts';
+import Cart from '../Screens/Cart';
+import CartHeader from '../Component/CartHeader';
+import Address from '../Screens/Address';
+import Account from '../Screens/Account';
+import OrderList from '../Screens/OrderList';
+import Aboutme from '../Screens/Aboutme';
+import Myaddress from '../Screens/Myaddress';
+import Notification from '../Screens/Notification';
+import Login from '../Screens/Login';
+import CreateAccount from '../Screens/CreateAccount';
+import NewAddress from '../Screens/NewAddress';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import ConfirmOrder from '../Screens/ConfirmOrder';
+import ForgotPassword from '../Screens/ForgotPassword';
 
 const HomeStack = createStackNavigator();
 const CategoryStack = createStackNavigator();
@@ -49,34 +49,34 @@ function HomeStackScreen() {
       <HomeStack.Screen
         name="Home"
         component={Home}
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
       />
       <HomeStack.Screen
         name="LoginScreen"
         component={Login}
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
       />
       <HomeStack.Screen
         name="CreateAccountScreen"
         component={CreateAccount}
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
       />
-        <HomeStack.Screen
+      <HomeStack.Screen
         name="ForgotScreen"
         component={ForgotPassword}
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
       />
       <HomeStack.Screen
         name="ProductList"
         component={ProductList}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           header: () => <Header title="Products" navigation={navigation} />,
         })}
       />
       <HomeStack.Screen
         name="ViewProducts"
         component={ViewProducts}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           header: () => (
             <CartHeader title="Product Details" navigation={navigation} />
           ),
@@ -85,7 +85,7 @@ function HomeStackScreen() {
       <HomeStack.Screen
         name="Address"
         component={Address}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           header: () => (
             <Header title="Shipping Address" navigation={navigation} />
           ),
@@ -94,7 +94,7 @@ function HomeStackScreen() {
       <HomeStack.Screen
         name="NewAddress"
         component={NewAddress}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           header: () => <Header title="New Address" navigation={navigation} />,
         })}
       />
@@ -102,14 +102,14 @@ function HomeStackScreen() {
       <HomeStack.Screen
         name="OrderList"
         component={OrderList}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           header: () => <Header title="Orders" navigation={navigation} />,
         })}
       />
       <HomeStack.Screen
         name="Aboutme"
         component={Aboutme}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           header: () => <Header title="About Me" navigation={navigation} />,
         })}
       />
@@ -117,7 +117,7 @@ function HomeStackScreen() {
       <HomeStack.Screen
         name="Favourites"
         component={Favourites}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           header: () => <Header title="Favourites" navigation={navigation} />,
         })}
       />
@@ -125,22 +125,24 @@ function HomeStackScreen() {
       <HomeStack.Screen
         name="Myaddress"
         component={Myaddress}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           header: () => <Header title="About Us" navigation={navigation} />,
         })}
       />
-       <HomeStack.Screen
+      <HomeStack.Screen
         name="ConfirmOrder"
         component={ConfirmOrder}
-        options={({ navigation }) => ({
-          header: () => <Header title="Order Summary" navigation={navigation} />,
+        options={({navigation}) => ({
+          header: () => (
+            <Header title="Order Summary" navigation={navigation} />
+          ),
         })}
       />
 
       <HomeStack.Screen
         name="Notification"
         component={Notification}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           header: () => (
             <Header title="Terms & Conditions" navigation={navigation} />
           ),
@@ -156,23 +158,83 @@ function CategoryStackScreen() {
       <CategoryStack.Screen
         name="CategoryScreen"
         component={Category}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           header: () => <Header title="Category" navigation={navigation} />,
         })}
       />
       <CategoryStack.Screen
         name="ProductList"
         component={ProductList}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           header: () => <Header title="Product List" navigation={navigation} />,
         })}
       />
       <CategoryStack.Screen
         name="Cart"
         component={Cart}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           header: () => <Header title="Cart" navigation={navigation} />,
         })}
+      />
+      <CategoryStack.Screen
+        name="ViewProducts"
+        component={ViewProducts}
+        options={({navigation}) => ({
+          header: () => (
+            <Header title="Product Details" navigation={navigation} />
+          ),
+        })}
+      />
+      <CategoryStack.Screen
+        name="Address"
+        component={Address}
+        options={({navigation}) => ({
+          header: () => (
+            <Header title="Shipping Address" navigation={navigation} />
+          ),
+        })}
+      />
+      <CategoryStack.Screen
+        name="NewAddress"
+        component={NewAddress}
+        options={({navigation}) => ({
+          header: () => <Header title="New Address" navigation={navigation} />,
+        })}
+      />
+      <CategoryStack.Screen
+        name="OrderList"
+        component={OrderList}
+        options={({navigation}) => ({
+          header: () => <Header title="Orders" navigation={navigation} />,
+        })}
+      />
+      <CategoryStack.Screen
+        name="Myaddress"
+        component={Myaddress}
+        options={({navigation}) => ({
+          header: () => <Header title="About Us" navigation={navigation} />,
+        })}
+      />
+      <CategoryStack.Screen
+        name="ConfirmOrder"
+        component={ConfirmOrder}
+        options={({navigation}) => ({
+          header: () => (
+            <Header title="Order Summary" navigation={navigation} />
+          ),
+        })}
+      />
+      <CategoryStack.Screen
+        name="CartScreen"
+        component={Cart}
+        options={({navigation}) => ({
+          header: () => <Header title="Cart" navigation={navigation} />,
+        })}
+      />
+      <CategoryStack.Screen
+        name="ForgotScreen"
+        component={ForgotPassword}
+        options={{headerShown: false}}
       />
     </CategoryStack.Navigator>
   );
@@ -184,24 +246,112 @@ function CartStackScreen() {
       <CartStack.Screen
         name="CartScreen"
         component={Cart}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           header: () => <Header title="Cart" navigation={navigation} />,
         })}
+      />
+      <CartStack.Screen
+        name="Address"
+        component={Address}
+        options={({navigation}) => ({
+          header: () => (
+            <Header title="Shipping Address" navigation={navigation} />
+          ),
+        })}
+      />
+      <CartStack.Screen
+        name="NewAddress"
+        component={NewAddress}
+        options={({navigation}) => ({
+          header: () => <Header title="New Address" navigation={navigation} />,
+        })}
+      />
+      <CartStack.Screen
+        name="OrderList"
+        component={OrderList}
+        options={({navigation}) => ({
+          header: () => <Header title="Orders" navigation={navigation} />,
+        })}
+      />
+      <CartStack.Screen
+        name="Myaddress"
+        component={Myaddress}
+        options={({navigation}) => ({
+          header: () => <Header title="About Us" navigation={navigation} />,
+        })}
+      />
+      <CartStack.Screen
+        name="ConfirmOrder"
+        component={ConfirmOrder}
+        options={({navigation}) => ({
+          header: () => (
+            <Header title="Order Summary" navigation={navigation} />
+          ),
+        })}
+      />
+      <CartStack.Screen
+        name="ForgotScreen"
+        component={ForgotPassword}
+        options={{headerShown: false}}
       />
     </CartStack.Navigator>
   );
 }
 
 // Account stack for the new "Account" tab
-function AccountStackScreen({ setIsLoggedIn }) {
+function AccountStackScreen({setIsLoggedIn}) {
   return (
     <AccountStack.Navigator>
       <AccountStack.Screen
         name="AccountScreen"
-        component={(props) => (
+        component={props => (
           <Account {...props} setIsLoggedIn={setIsLoggedIn} />
         )}
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
+      />
+      <AccountStack.Screen
+        name="Aboutme"
+        component={Aboutme}
+        options={({navigation}) => ({
+          header: () => <Header title="About Me" navigation={navigation} />,
+        })}
+      />
+
+      <AccountStack.Screen
+        name="Favourites"
+        component={Favourites}
+        options={({navigation}) => ({
+          header: () => <Header title="Favourites" navigation={navigation} />,
+        })}
+      />
+
+      <AccountStack.Screen
+        name="OrderList"
+        component={OrderList}
+        options={({navigation}) => ({
+          header: () => <Header title="Orders" navigation={navigation} />,
+        })}
+      />
+      <AccountStack.Screen
+        name="Notification"
+        component={Notification}
+        options={({navigation}) => ({
+          header: () => (
+            <Header title="Terms & Conditions" navigation={navigation} />
+          ),
+        })}
+      />
+      <AccountStack.Screen
+        name="Myaddress"
+        component={Myaddress}
+        options={({navigation}) => ({
+          header: () => <Header title="About Us" navigation={navigation} />,
+        })}
+      />
+      <AccountStack.Screen
+        name="ForgotScreen"
+        component={ForgotPassword}
+        options={{headerShown: false}}
       />
     </AccountStack.Navigator>
   );
@@ -209,22 +359,24 @@ function AccountStackScreen({ setIsLoggedIn }) {
 
 //..................AuthStack....................//
 
-function AuthStackScreen({ setIsLoggedIn }) {
+function AuthStackScreen({setIsLoggedIn}) {
   return (
     <AuthStack.Navigator>
       <AuthStack.Screen
         name="LoginScreen"
-        component={(props) => (
-          <Login {...props} setIsLoggedIn={setIsLoggedIn} />
-        )}
-        options={{ headerShown: false }}
+        component={props => <Login {...props} setIsLoggedIn={setIsLoggedIn} />}
+        options={{headerShown: false}}
       />
       <AuthStack.Screen
         name="CreateAccountScreen"
         component={CreateAccount}
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
       />
-      {/* Other screens can go here */}
+      <AuthStack.Screen
+        name="ForgotScreen"
+        component={ForgotPassword}
+        options={{headerShown: false}}
+      />
     </AuthStack.Navigator>
   );
 }
@@ -233,21 +385,21 @@ const BottomTab = createBottomTabNavigator();
 
 function Routes() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [initialRoute, setInitialRoute] = useState("LoginScreen");
+  const [initialRoute, setInitialRoute] = useState('LoginScreen');
 
   useEffect(() => {
     const checkToken = async () => {
       try {
-        const token = await AsyncStorage.getItem("user_token");
+        const token = await AsyncStorage.getItem('user_token');
         if (token) {
           setIsLoggedIn(true);
-          setInitialRoute("Home");
+          setInitialRoute('Home');
         } else {
           setIsLoggedIn(false);
-          setInitialRoute("LoginScreen");
+          setInitialRoute('LoginScreen');
         }
       } catch (error) {
-        console.error("Failed to load token.", error);
+        console.error('Failed to load token.', error);
       }
     };
 
@@ -260,41 +412,40 @@ function Routes() {
         <BottomTab.Navigator
           screenOptions={{
             headerShown: false,
-            tabBarActiveTintColor: "#FFFFFF",
-            tabBarInactiveTintColor: "#808080",
+            tabBarActiveTintColor: '#FFFFFF',
+            tabBarInactiveTintColor: '#808080',
             tabBarStyle: {
-              position: "absolute",
+              position: 'absolute',
               bottom: 0,
               left: 0,
               right: 0,
               elevation: 0,
-              backgroundColor: "#213E60",
+              backgroundColor: '#213E60',
               borderTopWidth: 0,
               height: 60,
             },
             tabBarLabelStyle: {
               fontSize: 12,
-              fontFamily: "serif",
+              fontFamily: 'serif',
               marginBottom: 10,
             },
             tabBarItemStyle: {
-              justifyContent: "center",
-              alignItems: "center",
+              justifyContent: 'center',
+              alignItems: 'center',
             },
-          }}
-        >
+          }}>
           <BottomTab.Screen
             name="Home"
             component={HomeStackScreen}
             options={{
-              tabBarLabel: "Home",
-              tabBarIcon: ({ focused, size }) => (
+              tabBarLabel: 'Home',
+              tabBarIcon: ({focused, size}) => (
                 <Image
                   source={focused ? Homeimg : HomeimgInactive}
                   style={{
                     width: size,
                     height: size,
-                    tintColor: focused ? "#FFFFFF" : "#808080",
+                    tintColor: focused ? '#FFFFFF' : '#808080',
                   }}
                 />
               ),
@@ -304,14 +455,14 @@ function Routes() {
             name="Category"
             component={CategoryStackScreen}
             options={{
-              tabBarLabel: "Category",
-              tabBarIcon: ({ focused, size }) => (
+              tabBarLabel: 'Category',
+              tabBarIcon: ({focused, size}) => (
                 <Image
                   source={focused ? Categoryimg : CategoryimgInactive}
                   style={{
                     width: size,
                     height: size,
-                    tintColor: focused ? "#FFFFFF" : "#808080",
+                    tintColor: focused ? '#FFFFFF' : '#808080',
                   }}
                 />
               ),
@@ -321,14 +472,14 @@ function Routes() {
             name="Cart"
             component={CartStackScreen}
             options={{
-              tabBarLabel: "Cart",
-              tabBarIcon: ({ focused, size }) => (
+              tabBarLabel: 'Cart',
+              tabBarIcon: ({focused, size}) => (
                 <Image
                   source={focused ? Cartwhite : Cartgrey}
                   style={{
                     width: size,
                     height: size,
-                    tintColor: focused ? "#FFFFFF" : "#808080",
+                    tintColor: focused ? '#FFFFFF' : '#808080',
                   }}
                 />
               ),
@@ -336,18 +487,18 @@ function Routes() {
           />
           <BottomTab.Screen
             name="Account"
-            component={(props) => (
+            component={props => (
               <AccountStackScreen {...props} setIsLoggedIn={setIsLoggedIn} />
             )}
             options={{
-              tabBarLabel: "Account",
-              tabBarIcon: ({ focused, size }) => (
+              tabBarLabel: 'Account',
+              tabBarIcon: ({focused, size}) => (
                 <Image
                   source={focused ? Userwhite : User}
                   style={{
                     width: size,
                     height: size,
-                    tintColor: focused ? "#FFFFFF" : "#808080",
+                    tintColor: focused ? '#FFFFFF' : '#808080',
                   }}
                 />
               ),

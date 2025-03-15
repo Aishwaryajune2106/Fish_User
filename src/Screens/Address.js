@@ -42,7 +42,7 @@ const Address = ({ route }) => {
 
     try {
       const response = await fetch(
-        "https://lunarsenterprises.com:6014/ajwa/list/address",
+        "https://lunarsenterprises.com:6009/fishapp/list/address",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -103,7 +103,7 @@ const Address = ({ route }) => {
 
     try {
       const response = await fetch(
-        "https://lunarsenterprises.com:6014/ajwa/edit/address",
+        "https://lunarsenterprises.com:6009/fishapp/edit/address",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -135,7 +135,7 @@ const Address = ({ route }) => {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
-        "https://lunarsenterprises.com:6014/ajwa/delete",
+        "https://lunarsenterprises.com:6009/fishapp/delete",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -193,6 +193,7 @@ const Address = ({ route }) => {
               <>
                 <TextInput
                   style={styles.input}
+                  placeholderTextColor={"#333333"}
                   value={currentAddress.address}
                   onChangeText={(text) =>
                     setCurrentAddress({ ...currentAddress, address: text })
@@ -201,6 +202,7 @@ const Address = ({ route }) => {
                 />
                 <TextInput
                   style={styles.input}
+                  placeholderTextColor={"#333333"}
                   value={currentAddress.zipcode}
                   onChangeText={(text) =>
                     setCurrentAddress({ ...currentAddress, zipcode: text })
@@ -210,6 +212,7 @@ const Address = ({ route }) => {
                 />
                 <TextInput
                   style={styles.input}
+                  placeholderTextColor={"#333333"}
                   value={currentAddress.city}
                   onChangeText={(text) =>
                     setCurrentAddress({ ...currentAddress, city: text })
@@ -218,6 +221,7 @@ const Address = ({ route }) => {
                 />
                 <TextInput
                   style={styles.input}
+                  placeholderTextColor={"#333333"}
                   value={currentAddress.mobile}
                   onChangeText={(text) =>
                     setCurrentAddress({ ...currentAddress, mobile: text })

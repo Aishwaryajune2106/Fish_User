@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -7,82 +7,85 @@ import {
   ImageBackground,
   StyleSheet,
   Image,
-} from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import LoginPage from "../assets/images/loginpage.jpg";
-import EyeOpenImg from "../assets/images/eye.png"
-import EyeClosedImg from "../assets/images/hiddeneye.png";
-import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
-import Toast from "react-native-toast-message"; // Import the Toast library
+  ActivityIndicator,
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import LoginPage from '../assets/images/loginpage.jpg';
+import EyeOpenImg from '../assets/images/eye.png';
+import EyeClosedImg from '../assets/images/hiddeneye.png';
+import {useNavigation} from '@react-navigation/native';
+import axios from 'axios';
+import Toast from 'react-native-toast-message'; // Import the Toast library
 
-export default function Login({ setIsLoggedIn }) {
+export default function Login({setIsLoggedIn}) {
   const navigation = useNavigation();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   //................LOGIN API.....................//
 
   const handleLogin = async () => {
     if (email && password) {
-      
-  
+      setLoading(true);
       try {
         const response = await axios.post(
-          "https://lunarsenterprises.com:6014/ajwa/login",
+          'https://lunarsenterprises.com:6009/fishapp/login',
           {
             email,
             password,
-            role:'user'
-          }
+            role: 'user',
+          },
         );
-       
-        const { result, message, u_id, user_token, name, mobile } = response.data; // Destructure 'mobile' from response
-        
-  
+
+        const {result, message, u_id, user_token, name, mobile} = response.data;
+        console.log(response.data, 'hellomydearwrongnumber');
+
         if (result) {
-          await AsyncStorage.setItem("email", email);
-          await AsyncStorage.setItem("u_id", u_id.toString());
-          await AsyncStorage.setItem("user_token", user_token);
-          await AsyncStorage.setItem("name", name); // Store the name in AsyncStorage
-          await AsyncStorage.setItem("mobile", mobile.toString()); // Store the mobile number in AsyncStorage
+          await AsyncStorage.setItem('email', email);
+          await AsyncStorage.setItem('u_id', u_id.toString());
+          await AsyncStorage.setItem('user_token', user_token);
+          await AsyncStorage.setItem('name', name);
+          await AsyncStorage.setItem('mobile', mobile ? mobile.toString() : ''); // Handle null values properly
+
           setIsLoggedIn(true);
           Toast.show({
-            type: "success",
-            text1: "Login Successful",
+            type: 'success',
+            text1: 'Login Successful',
             text2: message,
           });
-          navigation.navigate("Home");
+          navigation.navigate('Home');
         } else {
-          setErrorMessage("Login failed: Invalid credentials");
+          setErrorMessage('Login failed: Invalid credentials');
           Toast.show({
-            type: "error",
-            text1: "Login Failed",
-            text2: "Invalid credentials. Please try again.",
+            type: 'error',
+            text1: 'Login Failed',
+            text2: 'Invalid credentials. Please try again.',
           });
         }
       } catch (error) {
-       
-        setErrorMessage("An error occurred during login. Please try again.");
+        console.error('Login Error:', error); // Add logging for debugging
+        setErrorMessage('An error occurred during login. Please try again.');
         Toast.show({
-          type: "error",
-          text1: "Error",
-          text2: "An error occurred during login. Please try again.",
+          type: 'error',
+          text1: 'Error',
+          text2: 'An error occurred during login. Please try again.',
         });
+      } finally {
+        setLoading(false);
       }
     } else {
-      setErrorMessage("Please enter valid email and password.");
+      setErrorMessage('Please enter valid email and password.');
       Toast.show({
-        type: "error",
-        text1: "Input Error",
-        text2: "Please enter valid email and password.",
+        type: 'error',
+        text1: 'Input Error',
+        text2: 'Please enter valid email and password.',
       });
     }
   };
-  
 
   return (
     <ImageBackground source={LoginPage} style={styles.background}>
@@ -95,6 +98,7 @@ export default function Login({ setIsLoggedIn }) {
           </Text>
           <TextInput
             placeholder="Email Address"
+            placeholderTextColor={'#333333'}
             style={styles.input}
             keyboardType="email-address"
             value={email}
@@ -103,6 +107,7 @@ export default function Login({ setIsLoggedIn }) {
           <View style={styles.passwordContainer}>
             <TextInput
               placeholder="Password"
+              placeholderTextColor={'#333333'}
               style={styles.passwordInput}
               secureTextEntry={!showPassword}
               value={password}
@@ -119,24 +124,24 @@ export default function Login({ setIsLoggedIn }) {
           {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("ForgotPassword")}
-            style={styles.forgotPasswordContainer}
-          >
+            onPress={() => navigation.navigate('ForgotScreen')}
+            style={styles.forgotPasswordContainer}>
             <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.signupButton}
             disabled={!email || !password}
-            onPress={handleLogin}
-          >
-            <Text style={styles.signupButtonText}>Login</Text>
+            onPress={handleLogin}>{loading ? ( // Show loader when loading
+              <ActivityIndicator size="small" color="#ffffff" />
+            ) : (
+              <Text style={styles.signupButtonText}>Login</Text>
+            )}
           </TouchableOpacity>
 
           <View style={styles.accountContainer}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("CreateAccountScreen")}
-            >
+              onPress={() => navigation.navigate('CreateAccountScreen')}>
               <Text style={styles.createAccountText}>Create Account!</Text>
             </TouchableOpacity>
           </View>
@@ -150,74 +155,74 @@ export default function Login({ setIsLoggedIn }) {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   container: {
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     paddingHorizontal: 20,
     paddingBottom: 50,
   },
   welcomeText: {
     fontSize: 28,
-    color: "#fff",
-    fontWeight: "bold",
-    textAlign: "center",
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
     marginBottom: 20,
-    fontFamily: "serif",
+    fontFamily: 'serif',
     letterSpacing: 1,
   },
   formContainer: {
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
     borderRadius: 16,
     padding: 25,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 10,
   },
   headerText: {
     fontSize: 22,
-    fontWeight: "bold",
-    fontFamily: "serif",
-    color: "#333333",
+    fontWeight: 'bold',
+    fontFamily: 'serif',
+    color: '#333333',
     marginBottom: 5,
-    textAlign: "center",
+    textAlign: 'center',
   },
   subHeaderText: {
     fontSize: 15,
-    color: "#666666",
+    color: '#666666',
     marginBottom: 25,
-    fontFamily: "serif",
-    textAlign: "center",
+    fontFamily: 'serif',
+    textAlign: 'center',
   },
   input: {
-    backgroundColor: "#f4f4f4",
+    backgroundColor: '#f4f4f4',
     borderRadius: 12,
     padding: 15,
     fontSize: 16,
-    color: "#333333",
+    color: '#333333',
     marginBottom: 15,
-    fontFamily: "serif",
+    fontFamily: 'serif',
     borderWidth: 1,
-    borderColor: "#dcdcdc",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
+    borderColor: '#dcdcdc',
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 3,
     elevation: 4,
   },
   passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#f4f4f4",
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f4f4f4',
     borderRadius: 12,
     paddingHorizontal: 15,
     borderWidth: 1,
-    borderColor: "#dcdcdc",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
+    borderColor: '#dcdcdc',
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 3,
     elevation: 4,
@@ -225,8 +230,8 @@ const styles = StyleSheet.create({
   passwordInput: {
     flex: 1,
     fontSize: 16,
-    color: "#333333",
-    fontFamily: "serif",
+    color: '#333333',
+    fontFamily: 'serif',
     paddingVertical: 15,
   },
   eyeIcon: {
@@ -235,48 +240,48 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   forgotPasswordContainer: {
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
     marginTop: 10,
   },
   forgotPasswordText: {
-    color: "#213E60",
+    color: '#213E60',
     fontSize: 14,
-    fontFamily: "serif",
-    fontWeight: "bold",
+    fontFamily: 'serif',
+    fontWeight: 'bold',
   },
   signupButton: {
     borderRadius: 12,
     paddingVertical: 15,
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 20,
-    shadowColor: "#213E60",
-    backgroundColor: "#213E60",
-    shadowOffset: { width: 0, height: 4 },
+    shadowColor: '#213E60',
+    backgroundColor: '#213E60',
+    shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 10,
   },
   signupButtonText: {
-    color: "#ffffff",
+    color: '#ffffff',
     fontSize: 16,
-    fontFamily: "serif",
-    fontWeight: "bold",
+    fontFamily: 'serif',
+    fontWeight: 'bold',
     letterSpacing: 0.5,
   },
   accountContainer: {
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
     top: 5,
   },
   createAccountText: {
-    color: "#213E60",
+    color: '#213E60',
     fontSize: 14,
-    fontFamily: "serif",
-    fontWeight: "bold",
+    fontFamily: 'serif',
+    fontWeight: 'bold',
   },
   errorText: {
-    color: "red",
+    color: 'red',
     fontSize: 14,
     marginTop: 10,
-    textAlign: "center",
+    textAlign: 'center',
   },
 });

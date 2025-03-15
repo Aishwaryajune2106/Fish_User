@@ -30,7 +30,7 @@ const Cart = () => {
         try {
           const userId = await AsyncStorage.getItem("u_id");
           const response = await fetch(
-            "https://lunarsenterprises.com:6014/ajwa/list/cart",
+            "https://lunarsenterprises.com:6009/fishapp/list/cart",
             {
               method: "POST",
               headers: {
@@ -101,7 +101,7 @@ const Cart = () => {
   const DeleteCartItem = async (id) => {
     try {
       const response = await fetch(
-        "https://lunarsenterprises.com:6014/ajwa/delete",
+        "https://lunarsenterprises.com:6009/fishapp/delete",
         {
           method: "POST",
           headers: {
@@ -128,7 +128,7 @@ const Cart = () => {
       <Image
         source={
           item.p_image
-            ? { uri: `https://lunarsenterprises.com:6014/${item.p_image}` }
+            ? { uri: `https://lunarsenterprises.com:6009/${item.p_image}` }
             : NoImage
         }
         style={styles.image}

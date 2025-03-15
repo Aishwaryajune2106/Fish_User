@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -7,20 +7,20 @@ import {
   ImageBackground,
   StyleSheet,
   Image,
-} from "react-native";
-import axios from "axios";
+} from 'react-native';
+import axios from 'axios';
 import Toast from 'react-native-toast-message'; // Import Toast
-import AccountImg from "../assets/images/account.jpg";
-import EyeOpenImg from "../assets/images/eye.png";
-import EyeClosedImg from "../assets/images/hiddeneye.png";
-import { useNavigation } from "@react-navigation/native";
+import AccountImg from '../assets/images/account.jpg';
+import EyeOpenImg from '../assets/images/eye.png';
+import EyeClosedImg from '../assets/images/hiddeneye.png';
+import {useNavigation} from '@react-navigation/native';
 
 export default function CreateAccount() {
   const navigation = useNavigation();
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState(""); // State for Name
-  const [email, setEmail] = useState(""); // State for Email
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState(''); // State for Name
+  const [email, setEmail] = useState(''); // State for Email
 
   // Function to handle signup
   const handleSignup = async () => {
@@ -29,36 +29,45 @@ export default function CreateAccount() {
         type: 'error',
         text1: 'Invalid Input',
         text2: 'Please ensure all fields are filled.',
+        visibilityTime: 3000,
       });
       return;
     }
 
     try {
-      const response = await axios.post("https://lunarsenterprises.com:6014/ajwa/user/register", {
-        name,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        'https://lunarsenterprises.com:6009/fishapp/user/register',
+        {
+          name,
+          email,
+          password,
+        },
+      );
 
       if (response.data.result) {
         Toast.show({
           type: 'success',
           text1: 'Registration Successful',
           text2: response.data.message,
+          visibilityTime: 3000, 
         });
-        navigation.navigate("LoginScreen");
+        navigation.navigate('LoginScreen');
       } else {
         Toast.show({
           type: 'error',
           text1: 'Registration Failed',
           text2: response.data.message || 'An error occurred.',
+          visibilityTime: 3000, 
         });
       }
     } catch (error) {
       Toast.show({
         type: 'error',
         text1: 'Error',
-        text2: error.response?.data?.message || 'An error occurred. Please try again.',
+        text2:
+          error.response?.data?.message ||
+          'An error occurred. Please try again.',
+          visibilityTime: 3000,
       });
     }
   };
@@ -75,19 +84,22 @@ export default function CreateAccount() {
           <TextInput
             placeholder="Name"
             style={styles.input}
+            placeholderTextColor={'#333333'}
             value={name}
-            onChangeText={setName} 
+            onChangeText={setName}
           />
           <TextInput
             placeholder="Email Address"
             style={styles.input}
+            placeholderTextColor={'#333333'}
             keyboardType="email-address"
             value={email}
-            onChangeText={setEmail} 
+            onChangeText={setEmail}
           />
           <View style={styles.passwordContainer}>
             <TextInput
               placeholder="Password"
+              placeholderTextColor={'#333333'}
               style={styles.passwordInput}
               secureTextEntry={!showPassword}
               value={password}
@@ -101,22 +113,20 @@ export default function CreateAccount() {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity
-            style={styles.signupButton}
-            onPress={handleSignup}
-          >
+          <TouchableOpacity style={styles.signupButton} onPress={handleSignup}>
             <Text style={styles.signupButtonText}>Signup</Text>
           </TouchableOpacity>
 
           <View style={styles.loginContainer}>
             <Text style={styles.loginText}>Already have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('LoginScreen')}>
               <Text style={styles.loginLink}> Login</Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
-      <Toast /> 
+      <Toast />
     </ImageBackground>
   );
 }
@@ -124,74 +134,74 @@ export default function CreateAccount() {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   container: {
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     paddingHorizontal: 20,
     paddingBottom: 50,
   },
   welcomeText: {
     fontSize: 28,
-    fontFamily: "serif",
-    color: "#fff",
-    fontWeight: "bold",
-    textAlign: "center",
+    fontFamily: 'serif',
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
     marginBottom: 20,
     letterSpacing: 1,
   },
   formContainer: {
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
     borderRadius: 16,
     padding: 25,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 10,
   },
   headerText: {
     fontSize: 22,
-    fontFamily: "serif",
-    fontWeight: "bold",
-    color: "#333333",
+    fontFamily: 'serif',
+    fontWeight: 'bold',
+    color: '#333333',
     marginBottom: 5,
-    textAlign: "center",
+    textAlign: 'center',
   },
   subHeaderText: {
     fontSize: 15,
-    color: "#666666",
+    color: '#666666',
     marginBottom: 25,
-    textAlign: "center",
-    fontFamily: "serif",
+    textAlign: 'center',
+    fontFamily: 'serif',
   },
   input: {
-    backgroundColor: "#f4f4f4",
+    backgroundColor: '#f4f4f4',
     borderRadius: 12,
     padding: 15,
     fontSize: 16,
-    color: "#333333",
-    fontFamily: "serif",
+    color: '#333333',
+    fontFamily: 'serif',
     marginBottom: 15,
     borderWidth: 1,
-    borderColor: "#dcdcdc",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
+    borderColor: '#dcdcdc',
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 3,
     elevation: 4,
   },
   passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#f4f4f4",
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f4f4f4',
     borderRadius: 12,
     paddingHorizontal: 15,
     borderWidth: 1,
-    borderColor: "#dcdcdc",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
+    borderColor: '#dcdcdc',
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 3,
     elevation: 4,
@@ -199,9 +209,9 @@ const styles = StyleSheet.create({
   passwordInput: {
     flex: 1,
     fontSize: 16,
-    color: "#333333",
+    color: '#333333',
     paddingVertical: 15,
-    fontFamily: "serif",
+    fontFamily: 'serif',
   },
   eyeIcon: {
     width: 27,
@@ -211,37 +221,37 @@ const styles = StyleSheet.create({
   signupButton: {
     borderRadius: 12,
     paddingVertical: 15,
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 20,
-    shadowColor: "#213E60",
-    backgroundColor: "#213E60",
-    shadowOffset: { width: 0, height: 4 },
+    shadowColor: '#213E60',
+    backgroundColor: '#213E60',
+    shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 10,
   },
   signupButtonText: {
-    color: "#ffffff",
+    color: '#ffffff',
     fontSize: 16,
-    fontFamily: "serif",
-    fontWeight: "bold",
+    fontFamily: 'serif',
+    fontWeight: 'bold',
     letterSpacing: 0.5,
   },
   loginContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
     marginTop: 20,
   },
   loginText: {
     fontSize: 14,
-    color: "#213E60",
-    fontFamily: "serif",
+    color: '#213E60',
+    fontFamily: 'serif',
   },
   loginLink: {
     fontSize: 14,
-    color: "#213E60",
-    fontFamily: "serif",
-    fontWeight: "bold",
+    color: '#213E60',
+    fontFamily: 'serif',
+    fontWeight: 'bold',
     marginLeft: 5,
   },
 });

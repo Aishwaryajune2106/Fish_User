@@ -14,9 +14,9 @@ const Myaddress = () => {
 
       {/* Description Section */}
       <View style={styles.descriptionContainer}>
-        <Text style={styles.title}>Welcome to Ajwa Supermarket</Text>
+        <Text style={styles.title}>Welcome to Healthy Fresh </Text>
         <Text style={styles.description}>
-          At Ajwa Supermarket, we are dedicated to providing you with the finest
+          At Healthy Fresh , we are dedicated to providing you with the finest
           quality products and exceptional customer service. Our supermarket is
           your one-stop shop for fresh produce, groceries, household essentials,
           and much more. We believe in serving our community with the best

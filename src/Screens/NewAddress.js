@@ -75,7 +75,7 @@ const NewAddress = () => {
 
       try {
         const response = await fetch(
-          "https://lunarsenterprises.com:6014/ajwa/add/address",
+          "https://lunarsenterprises.com:6009/fishapp/add/address",
           {
             method: "POST",
             headers: {
@@ -123,6 +123,7 @@ const NewAddress = () => {
       {/* Form Fields */}
       <TextInput
         style={styles.input}
+        placeholderTextColor={"#333333"}
         placeholder="Name"
         value={form.name}
         onChangeText={(value) => handleChange("name", value)}
@@ -133,6 +134,7 @@ const NewAddress = () => {
         style={styles.input}
         placeholder="Email Address"
         value={form.email}
+        placeholderTextColor={"#333333"}
         onChangeText={(value) => handleChange("email", value)}
         keyboardType="email-address"
       />
@@ -142,6 +144,7 @@ const NewAddress = () => {
         style={styles.input}
         placeholder="Phone Number"
         value={form.phone}
+        placeholderTextColor={"#333333"}
         onChangeText={(value) => handleChange("phone", value)}
         keyboardType="phone-pad"
       />
@@ -151,6 +154,7 @@ const NewAddress = () => {
         style={styles.input}
         placeholder="Address"
         value={form.address}
+        placeholderTextColor={"#333333"}
         onChangeText={(value) => handleChange("address", value)}
       />
       {errors.address && <Text style={styles.errorText}>{errors.address}</Text>}
@@ -158,6 +162,7 @@ const NewAddress = () => {
       <TextInput
         style={styles.input}
         placeholder="Zip Code"
+        placeholderTextColor={"#333333"}
         value={form.zipCode}
         onChangeText={(value) => handleChange("zipCode", value)}
         keyboardType="numeric"
@@ -167,6 +172,7 @@ const NewAddress = () => {
       <TextInput
         style={styles.input}
         placeholder="City"
+        placeholderTextColor={"#333333"}
         value={form.city}
         onChangeText={(value) => handleChange("city", value)}
       />

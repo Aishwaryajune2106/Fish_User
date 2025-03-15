@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,30 +7,30 @@ import {
   TouchableOpacity,
   Alert,
   Image,
-} from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import Edit from "../assets/images/edit.png"; // Edit icon image
-import axios from "axios";
-import Toast from "react-native-toast-message";
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Edit from '../assets/images/edit.png'; // Edit icon image
+import axios from 'axios';
+import Toast from 'react-native-toast-message';
 
 const AboutMe = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        const storedName = await AsyncStorage.getItem("name");
-        const storedEmail = await AsyncStorage.getItem("email");
-        const storedPhone = await AsyncStorage.getItem("phone");
+        const storedName = await AsyncStorage.getItem('name');
+        const storedEmail = await AsyncStorage.getItem('email');
+        const storedPhone = await AsyncStorage.getItem('phone');
 
         if (storedName) setName(storedName);
         if (storedEmail) setEmail(storedEmail);
         if (storedPhone) setPhone(storedPhone);
       } catch (error) {
-        console.error("Failed to load data from AsyncStorage:", error);
+        console.error('Failed to load data from AsyncStorage:', error);
       }
     };
 
@@ -43,13 +43,13 @@ const AboutMe = () => {
   //...............Update Api.................//
 
   const handleUpdate = async () => {
-    const storedUserId = await AsyncStorage.getItem("u_id");
+    const storedUserId = await AsyncStorage.getItem('u_id');
 
     if (!storedUserId) {
       Toast.show({
-        type: "error",
-        text1: "Error",
-        text2: "User ID not found. Please log in again.",
+        type: 'error',
+        text1: 'Error',
+        text2: 'User ID not found. Please log in again.',
       });
       return;
     }
@@ -58,53 +58,50 @@ const AboutMe = () => {
 
     // Create FormData and append fields
     const formData = new FormData();
-    formData.append("u_id", u_id);
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("mobile", phone);
-
-   
+    formData.append('u_id', u_id);
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('mobile', phone);
 
     try {
       const response = await axios.post(
-        "https://lunarsenterprises.com:6014/ajwa/edit/profile",
+        'https://lunarsenterprises.com:6009/fishapp/edit/profile',
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
-        }
+        },
       );
 
-    
-
       if (response.data.result) {
-        await AsyncStorage.setItem("name", name);
-        await AsyncStorage.setItem("email", email);
-        await AsyncStorage.setItem("phone", phone);
+        await AsyncStorage.setItem('name', name);
+        await AsyncStorage.setItem('email', email);
+        await AsyncStorage.setItem('phone', phone);
 
         Toast.show({
-          type: "success",
-          text1: "Success",
+          type: 'success',
+          text1: 'Success',
           text2: response.data.message,
         });
         setIsEditing(false);
       } else {
         Toast.show({
-          type: "error",
-          text1: "Error",
+          type: 'error',
+          text1: 'Error',
           text2: response.data.message,
         });
       }
     } catch (error) {
-      console.error("Error Name:", error.name);
-      console.error("Error Message:", error.message);
-      console.error("Error Stack:", error.stack);
+      console.error('Error Name:', error.name);
+      console.error('Error Message:', error.message);
+      console.error('Error Stack:', error.stack);
 
       Toast.show({
-        type: "error",
-        text1: "Error",
-        text2: "Network request failed. Please check your internet connection or try again later.",
+        type: 'error',
+        text1: 'Error',
+        text2:
+          'Network request failed. Please check your internet connection or try again later.',
       });
     }
   };
@@ -117,12 +114,14 @@ const AboutMe = () => {
             <TextInput
               style={styles.input}
               value={name}
+              placeholderTextColor={'#333333'}
               onChangeText={setName}
               placeholder="Name"
             />
             <TextInput
               style={styles.input}
               value={email}
+              placeholderTextColor={'#333333'}
               onChangeText={setEmail}
               keyboardType="email-address"
               placeholder="Email"
@@ -130,14 +129,14 @@ const AboutMe = () => {
             <TextInput
               style={styles.input}
               value={phone}
+              placeholderTextColor={'#333333'}
               onChangeText={setPhone}
               keyboardType="phone-pad"
               placeholder="Phone"
             />
             <TouchableOpacity
               onPress={handleUpdate}
-              style={styles.updateButton}
-            >
+              style={styles.updateButton}>
               <Text style={styles.updateButtonText}>Update</Text>
             </TouchableOpacity>
           </>
@@ -175,15 +174,15 @@ const AboutMe = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F9F9F9",
+    backgroundColor: '#F9F9F9',
   },
   profileContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     marginVertical: 30,
     padding: 20,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
     borderRadius: 10,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 1,
@@ -194,51 +193,51 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 22,
-    fontWeight: "bold",
-    color: "#1A1A1A",
-    fontFamily: "serif",
+    fontWeight: 'bold',
+    color: '#1A1A1A',
+    fontFamily: 'serif',
   },
   email: {
     fontSize: 16,
-    color: "#A0A0A0",
-    fontFamily: "serif",
+    color: '#A0A0A0',
+    fontFamily: 'serif',
   },
   phone: {
     fontSize: 16,
-    color: "#A0A0A0",
+    color: '#A0A0A0',
     marginBottom: 20,
-    fontFamily: "serif",
+    fontFamily: 'serif',
   },
   input: {
-    width: "100%",
+    width: '100%',
     borderWidth: 1,
-    borderColor: "#C0C0C0",
+    borderColor: '#C0C0C0',
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
     fontSize: 16,
-    fontFamily: "serif",
+    fontFamily: 'serif',
   },
   updateButton: {
-    backgroundColor: "#213E60",
+    backgroundColor: '#213E60',
     padding: 10,
     borderRadius: 5,
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 10,
-    width: "100%",
+    width: '100%',
   },
   updateButtonText: {
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: "bold",
-    fontFamily: "serif",
+    fontWeight: 'bold',
+    fontFamily: 'serif',
   },
   infoContainer: {
     marginHorizontal: 20,
     padding: 15,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
     borderRadius: 10,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 1,
@@ -253,34 +252,34 @@ const styles = StyleSheet.create({
   },
   infoHeader: {
     fontSize: 18,
-    fontFamily: "serif",
-    fontWeight: "bold",
-    color: "#213E60",
+    fontFamily: 'serif',
+    fontWeight: 'bold',
+    color: '#213E60',
     marginBottom: 10,
   },
   contactRow: {
-    flexDirection: "column",
-    alignItems: "flex-start",
+    flexDirection: 'column',
+    alignItems: 'flex-start',
   },
   contactInfo: {
     marginBottom: 10,
   },
   infoText: {
     fontSize: 14,
-    color: "#1A1A1A",
-    fontFamily: "serif",
+    color: '#1A1A1A',
+    fontFamily: 'serif',
   },
   footer: {
     marginTop: 20,
-    alignItems: "center",
+    alignItems: 'center',
   },
   footerText: {
     fontSize: 14,
-    color: "#A0A0A0",
-    fontFamily: "serif",
+    color: '#A0A0A0',
+    fontFamily: 'serif',
   },
   editIcon: {
-    position: "absolute",
+    position: 'absolute',
     right: 10,
     top: 10,
   },

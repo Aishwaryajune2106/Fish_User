@@ -53,7 +53,7 @@ const ConfirmOrder = () => {
 
     try {
       const response = await axios.post(
-        "https://lunarsenterprises.com:6014/ajwa/add/order",
+        "https://lunarsenterprises.com:6009/fishapp/add/order",
         orderData
       );
       const { result } = response.data;
